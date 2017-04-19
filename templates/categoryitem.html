@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% include "header.html" %} {% block content %}
+<div class="row">
+    <div class="col-md-12 title-category">
+        <h2>{{category.name}}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 add-btn">
+        <a href="{{url_for('item.newitem', category_id = category.id)}}">
+            <button class="btn btn-default">
+                Add an item
+            </button>
+        </a>
+    </div>
+</div>
+<div class='flash'>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li><strong> {{ message }} </strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</div>
+<div class="row item-list">
+    {% for i in items %}
+    <div class="col-md-4 col-xs-12 item-bundle">
+        <img src="{{i.picture}}" alt="Product picture" width="230" height="235">
+        <div class="item-detail">
+            <p>{{i.name}}</p>
+            <p>{{i.price}}</p>
+            <div class="item-description">{{i.description}}</div>
+            <br>
+        </div>
+        <div class="btn-bundle">
+            <a href="{{url_for('item.edititem',category_id = category.id, item_id=i.id)}}">
+                <button class="edit-delete-cancel-btn">
+                    Edit
+                </button>
+            </a>
+            <a href="{{url_for('item.deleteitem', category_id=category.id,item_id = i.id)}}">
+                <button class="edit-delete-cancel-btn" onclick="return getConfirmation();">
+                    Delete
+                </button>
+            </a>
+        </div>
+    </div>
+    {% if user_id and creator.id == user_id: %}
+    <!--<div class="col-xs-12">-->
+    {% endif %}
+    <script type="text/javascript">
+    function getConfirmation() {
+        var retVal = confirm("Do you really want to delete?");
+        if (retVal == true) {
+            window.location.href = "{{url_for('item.deleteitem', category_id=category.id,
+            item_id = i.id)}}";
+    } else {
+        return false;
+        }
+    }
+    </script>
+    {% endfor %}
+</div>
+{% endblock %}
+</div>

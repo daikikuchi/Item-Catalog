@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% include "header.html" %} {% block content %}
+<div class="row">
+    <div class="col-md-12 title-category">
+        <h2>Categories</h2>
+    </div>
+</div>
+<div class='flash'>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 add-btn">
+        <a href="{{url_for('category.newcategory')}}">
+            <button class="btn btn-default">
+                Add an category
+            </button>
+        </a>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+{% for category in c %}
+<a href="{{url_for('item.categoryitem', category_id = category.id)}}">
+    <div class="row category-bundle">
+        <div class=".col-lg-4 col-md-4 col-xs-12 category-list">
+            <h3>{{category.name}}</h3>
+            <img src="{{category.picture}}" height="150" width="350" alt="category image">
+        </div>
+        <div class="col-xs-12">
+            <a href="{{url_for('category.editcategory',category_id = category.id)}}">
+                <button class="edit-delete-cancel-btn">
+                    Edit
+                </button>
+            </a>
+            <a href="{{url_for('category.deletecategory', category_id=category.id)}}">
+                <button class="edit-delete-cancel-btn" onclick="return getConfirmation();">
+                    Delete
+                </button>
+            </a>
+        </div>
+        <script type="text/javascript">
+        function getConfirmation() {
+            var retVal = confirm("Do you really want to delete?");
+            if (retVal == true) {
+                window.location.href = "{{url_for('category.deletecategory', category_id=category.id)}}";
+            } else {
+                return false;
+            }
+        }
+        </script>
+    </div>
+</a>
+{% endfor %} {% endblock %}

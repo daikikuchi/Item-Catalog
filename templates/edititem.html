@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% include "header.html" %} {% block content %}
+<div class="row">
+    <div class="col-md-12 title-category">
+        <h2>{{category.name}}</h2>
+        <h3>Edit the following item!</h3>
+    </div>
+</div>
+<div class='flash'>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li><strong>{{message}}</strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</div>
+<div class="col-md-12 col-xs-12 edit-bundle">
+    <form action="{{url_for('item.edititem', category_id=category.id,
+               item_id = item_id)}} " method='POST' enctype="multipart/form-data">
+        <div class="col-md-12 col-ms-1 img-holder">
+            <img class="edit-picture" src={{item.picture}} alt="Product picture" width="320" height="235">
+        </div>
+        <div class="form-group">
+            <label for="item-name">Name:</label>
+            <br>
+            <input type="text" maxlength="20" class="form-control" name="name" value="{{item.name }}" id="item-name">
+            <br>
+            <label for="item-description">Description:</label>
+            <br>
+            <textarea class="form-control" maxlength="100" rows="3" name="description" id="item-description">{{item.description}}</textarea>
+            <br>
+            <label for="item-price">Price:</label>
+            <br>
+            <input type="text" maxlength="10" class="form-control" name="price" value="{{item.price }}" id="item-price">
+            <br>
+            <label for="link">Provide a link to image here (.png, .jpg/jpeg or .gif only):</label>
+            <br>
+            <input type="text" class="form-control" name="link" placeholder="Only image links" id="link">
+            <br>
+            <label for="image"> Or upload a file here (.png, .jpg/jpeg or .gif only, max 10MB)</label>
+            <br>
+            <input type="file" class="form-control" name="image" id="image">
+            <button type='submit' class="edit-delete-cancel-btn">
+                Edit
+            </button>
+            <a href="{{url_for('item.categoryitem', category_id= category.id)}}">
+                <button class="edit-delete-cancel-btn">
+                    Cancel
+                </button>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

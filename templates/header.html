@@ -1,0 +1,14 @@
+<div class="header">
+    <div class="header">
+        {%if 'username' not in session %}
+        <a class="login" href="{{url_for('authentication.showlogin')}}">Click Here to Login </a> {% else %}
+        <a href="{{url_for('authentication.disconnect')}}">Logout </a> {% endif %}
+        <div class="title">
+            <a href="{{url_for('category.showcategories')}}">
+                <h1>Item Catalog</h1>
+            </a>
+        </div>
+    </div>
+    <div class="row banner main">
+    </div>
+</div>

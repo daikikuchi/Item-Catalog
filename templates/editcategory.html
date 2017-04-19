@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% include "header.html" %} {% block content %}
+<div class="row">
+    <div class="col-md-12 title-category">
+        <h2>{{category.name}}</h2>
+        <h3>Edit the following category!</h3>
+    </div>
+</div>
+<div class='flash'>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li><strong>{{message}}</strong></li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+</div>
+<div class="col-md-12 col-xs-12 edit-bundle">
+    <form action="{{url_for('category.editcategory',
+  category_id=category.id)}} " method='POST' enctype="multipart/form-data">
+        <div class="col-md-12 col-ms-1 img-holder">
+            <img class="edit-picture" src={{category.picture}} alt="Product picture" width="310" height="235">
+        </div>
+        <div class="form-group">
+            <label for="category-name">Name:</label>
+            <br>
+            <input type="text" maxlength="20" class="form-control" name="name" value="{{category.name }}" id="category-name">
+            <br>
+            <label for="link">Provide a link to image here (.png, .jpg/jpeg or .gif only):</label>
+            <br>
+            <input type="text" class="form-control" name="link" placeholder="Only image links" id="link">
+            <br>
+            <label for="image"> Or upload a file here (.png, .jpg/jpeg or .gif only, max 10MB)</label>
+            <br>
+            <input type="file" class="form-control" name="image" id="image">
+            <button type='submit' class="edit-delete-cancel-btn">
+                Edit
+            </button>
+            <a href="{{url_for('category.showcategories')}}">
+                <button class="edit-delete-cancel-btn">
+                    Cancel
+                </button>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
