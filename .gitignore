@@ -1,0 +1,12 @@
+fb_client_secrets.json
+google_client_secrets.json
+*.db
+.idea
+*.pyc
+.DS_Store
+lib/*
+static/users/*.jpg
+static/users/*.png
+app.yaml
+appengine_config.py
+requirements.txt
