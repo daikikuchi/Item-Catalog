@@ -69,7 +69,8 @@ def editcategory(category_id):
     if request.method == 'POST':
         user_id = login_session['user_id']
         if editedcategory.user_id != user_id:
-            return redirect('/login')
+            flash("You can't delete this category")
+            return redirect(url_for('category.showcategories'))
         else:
             link = getlink(request)
             if request.form['name']:
@@ -83,7 +84,12 @@ def editcategory(category_id):
             session.commit()
             return redirect(url_for('category.showcategories'))
     else:
-        return render_template('editcategory.html', category=editedcategory)
+        user_id = login_session['user_id']
+        if editedcategory.user_id != user_id:
+            flash("You can't edit this category")
+            return redirect(url_for('category.showcategories'))
+        else:
+            return render_template('editcategory.html', category=editedcategory)
 
 
 # Delete a category
@@ -94,7 +100,8 @@ def deletecategory(category_id):
     if cat:
         user_id = login_session['user_id']
         if cat.user_id != user_id:
-            return redirect('/login')
+            flash("You can't delete this category")
+            return redirect(url_for('category.showcategories'))
         else:
             session.delete(cat)
             session.commit()

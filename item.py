@@ -97,7 +97,8 @@ def edititem(category_id, item_id):
         if request.method == 'POST':
             login_user_id = login_session['user_id']
             if editeditem.user_id != login_user_id:
-                return redirect('/login')
+                flash("You can't delete this item")
+                return redirect(url_for('category.showcategories'))
             else:
 
                 link = getlink(request)
@@ -117,7 +118,12 @@ def edititem(category_id, item_id):
                 return redirect(url_for('item.categoryitem',
                                         category_id=category_id))
         else:
-            return render_template('edititem.html', category=category,
+            login_user_id = login_session['user_id']
+            if editeditem.user_id != login_user_id:
+                flash("You can't edit this item")
+                return redirect(url_for('category.showcategories'))
+            else:
+                return render_template('edititem.html', category=category,
                                    item_id=item_id, item=editeditem)
     else:
         flash("There is no such item and category")
@@ -132,7 +138,8 @@ def deleteitem(category_id, item_id):
     if deleteditem:
         login_user_id = login_session['user_id']
         if deleteditem.user_id != login_user_id:
-            return redirect('/login')
+            flash("You can't delete this item")
+            return redirect(url_for('category.showcategories'))
         else:
             session.delete(deleteditem)
             session.commit()
