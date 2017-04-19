@@ -32,6 +32,9 @@
             <div class="item-description">{{i.description}}</div>
             <br>
         </div>
+
+        {% if user_id and creator.id == user_id: %}
+
         <div class="btn-bundle">
             <a href="{{url_for('item.edititem',category_id = category.id, item_id=i.id)}}">
                 <button class="edit-delete-cancel-btn">
@@ -44,10 +47,10 @@
                 </button>
             </a>
         </div>
+        {% endif %}
     </div>
-    {% if user_id and creator.id == user_id: %}
-    <!--<div class="col-xs-12">-->
-    {% endif %}
+
+
     <script type="text/javascript">
     function getConfirmation() {
         var retVal = confirm("Do you really want to delete?");

@@ -31,6 +31,9 @@
             <h3>{{category.name}}</h3>
             <img src="{{category.picture}}" height="150" width="350" alt="category image">
         </div>
+
+          {% if category.user_id == login_user_id %}
+
         <div class="col-xs-12">
             <a href="{{url_for('category.editcategory',category_id = category.id)}}">
                 <button class="edit-delete-cancel-btn">
@@ -43,6 +46,8 @@
                 </button>
             </a>
         </div>
+         {% endif %}
+
         <script type="text/javascript">
         function getConfirmation() {
             var retVal = confirm("Do you really want to delete?");
