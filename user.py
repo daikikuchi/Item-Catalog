@@ -1,4 +1,4 @@
-from database_setup import Base, User
+from database_setup import Base, User, Item, Category
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -9,7 +9,9 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
-# User Helper Functions
+ # User Helper Functions
+
+
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
         'email'], picture=login_session['picture'])
@@ -19,11 +21,9 @@ def createUser(login_session):
         email=login_session['email']).one()
     return user.id
 
-
 def getUserInfo(user_id):
     user = session.query(User).filter_by(id=user_id).one()
     return user
-
 
 def getUserID(email):
     try:
@@ -31,7 +31,6 @@ def getUserID(email):
         return user.id
     except:
         return None
-
 
 def getUserName(email):
     try:
