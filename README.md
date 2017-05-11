@@ -21,6 +21,9 @@ a user registration and authentication by google or facebook. Registered users w
 - run `python main.py` to run the Flask web server. 
 - Access it at http://localhost:9999/ to view Item Catalog app.
 
+
+## View live version here: http://ec2-35-162-159-229.us-west-2.compute.amazonaws.com/
+
 #### Project description
 - CRUD
 1. Website reads category and item information from a database.
