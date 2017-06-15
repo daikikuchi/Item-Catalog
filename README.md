@@ -3,6 +3,8 @@
 This is an application that provides a list of items within a variety of categories as well as provide 
 a user registration and authentication by google or facebook. Registered users will have the ability to post, edit and delete their own category and items.
 
+## You can view it live here: http://ec2-13-54-55-135.ap-southeast-2.compute.amazonaws.com/
+
 #### Requirements
 - Python 2.7
 - Facebook or Google account
