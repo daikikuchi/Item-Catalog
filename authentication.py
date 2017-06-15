@@ -55,17 +55,7 @@ def fbconnect():
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
-    """Use token to get user info from API
-    userinfo_url = "https://graph.facebook.com/v2.8/me"
-    strip expire tag from access token
-    token = result.split("&")[0]
-    result is a json as the below
-    {
-        "access_token": "EAAFzQBO7mQgBAMObpVDSAhi2Q2wasibMSF6KCNEQZBuYesqYtrEN
-        jdTJkh1OoSVyMv7n56RrK4WTnjIN8v3lqOZAEkmFBrDBpn8Yw0PINKcx0pddtIilCN0Rbdk
-        s0yJnkIwi9cGDD8SXt85EI6Vzr0HdvfEQwZD",
-        "token_type": "bearer", "expires_in": 5179714}
-    split json result by ", and get the index[3] for access_token"""
+    # Use token to get user info from API
 
     token = result.split('"')[3]
     # token = token.replace('"', '')
